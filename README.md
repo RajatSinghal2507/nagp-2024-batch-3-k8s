@@ -1,1 +1,0 @@
-# nagp-2024-batch-3-k8s
