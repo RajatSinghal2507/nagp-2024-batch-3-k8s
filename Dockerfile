@@ -4,13 +4,9 @@ FROM maven:3.8.4-openjdk-17-slim AS build
 # Set the working directory in the container
 WORKDIR /app
 
-# Clone the Git repository
-RUN git clone https://github.com/RajatSinghal2507/nagp-2024-batch-3-k8s.git .
-
 # Copy the Maven project files to the container
-#COPY pom.xml .
-#COPY src ./src
-RUN CD nagp-2024-batch-3-k8s
+COPY pom.xml .
+COPY src ./src
 
 # Build the Maven project
 RUN mvn clean package -DskipTests

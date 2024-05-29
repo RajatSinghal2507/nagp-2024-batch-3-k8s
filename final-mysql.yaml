@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mysql-secret
-  namespace: assignment
+  namespace: rajatsinghal-3171075
 type: Opaque
 data:
   MYSQL_ROOT_PASSWORD: cm9vdA==
@@ -11,6 +11,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql-headless
+  namespace: rajatsinghal-3171075
 spec:
   clusterIP: None
   selector:
@@ -24,7 +25,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
-  namespace: assignment
+  namespace: rajatsinghal-3171075
 spec:
   serviceName: mysql-headless
   replicas: 1
@@ -50,7 +51,7 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: mysql-persistent-storage
-        namespace: assignment
+        namespace: rajatsinghal-3171075
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
