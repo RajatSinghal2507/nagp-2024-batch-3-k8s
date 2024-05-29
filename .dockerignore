@@ -1,0 +1,29 @@
+# Ignore Maven and Gradle build directories
+target/
+
+# Ignore IntelliJ IDEA project files
+.idea/
+*.iml
+
+# Ignore temporary files and directories
+*.tmp
+*.temp
+*.log
+*.swp
+*~
+.DS_Store
+
+# Ignore git files
+.git
+.gitignore
+
+# Ignore Dockerfile
+Dockerfile
+
+# Ignore documentation files
+README.md
+
+# do not need the Maven Wrapper in Docker build context
+.mvn/
+mvnw
+mvnw.cmd

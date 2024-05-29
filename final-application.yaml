@@ -1,0 +1,90 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-credentials
+  namespace: assignment
+type: Opaque
+data:
+  db.username: cm9vdA==
+  db.password: cm9vdA==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: assignment
+data:
+  datasource.url: mysql-0.mysql-headless.assignment.svc.cluster.local
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-java-1
+  namespace: assignment
+  labels:
+    app: pod-java-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-java-1
+  template:
+    metadata:
+      labels:
+        app: pod-java-1
+    spec:
+      containers:
+        - name: pod-java-1-container
+          image: rajatsinghal2507/nagp-2024-k8s-assignment:headlessproperties
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db.username
+            - name: DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: datasource.url
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db.password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-service-1
+  namespace: assignment
+spec:
+  selector:
+    app: pod-java-1
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: api-hpa
+  namespace: assignment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pod-java-1
+  minReplicas: 3
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 10
