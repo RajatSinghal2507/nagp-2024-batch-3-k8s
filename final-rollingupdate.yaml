@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-java-1
+  namespace: rajatsinghal-3171075
+  labels:
+    app: pod-java-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-java-1
+  template:
+    metadata:
+      labels:
+        app: pod-java-1
+    spec:
+      containers:
+        - name: pod-java-1-container
+          image: rajatsinghal2507/nagp-2024-k8s-assignment:v2
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db.username
+            - name: DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: datasource.url
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: db.password

@@ -80,7 +80,7 @@ spec:
     kind: Deployment
     name: pod-java-1
   minReplicas: 3
-  maxReplicas: 5
+  maxReplicas: 4
   metrics:
     - type: Resource
       resource:

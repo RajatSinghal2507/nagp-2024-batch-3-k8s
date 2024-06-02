@@ -2,6 +2,19 @@
 
 This project is the completed assignment for NAGP 2024 Batch 3 K8S sessions. This is a Spring Boot Maven application that connects to a MySQL database and performs basic CRUD operations.
 
+The code repository is available at this [GitHub](https://github.com/RajatSinghal2507/nagp-2024-batch-3-k8s) link. 
+The repo contains the following:
+1. 4 K8S YAML files.
+   1. namespace.yaml
+   2. final-mysql.yaml
+   3. final-application.yaml
+   4. final-rollingupdate.yaml
+2. Explanations related to these yaml files could be found at this [Drive]() link.
+3. The service API has the below mappings:
+   1. `/demo`: GET :  A String 'TEST COMPLETED' will be displayed in the browser to assert that the application is running.
+   2. `/demo/all`: GET:  List of all the users saved in the `user` table of `nagp` DB.
+   3. `/demo/add?name=rajat&email=rajat@gmail.com`: POST: add a row in the `user` table of `nagp` DB with specified `name` and `email` column values.
+4. The images of the application could be found on [DockerHub](https://hub.docker.com/repository/docker/rajatsinghal2507/nagp-2024-k8s-assignment/general)
 ## Features
 
 - Spring Boot application
@@ -24,7 +37,7 @@ This project is the completed assignment for NAGP 2024 Batch 3 K8S sessions. Thi
 
 1. Clone the repository to your local system.
     ```cmd
-    git clone <repository-url>
+    git clone https://github.com/RajatSinghal2507/nagp-2024-batch-3-k8s.git
     ```
 2. Navigate to the root of the project and run:
     ```cmd
@@ -66,8 +79,8 @@ This project is the completed assignment for NAGP 2024 Batch 3 K8S sessions. Thi
     ```
 4. Verify the deployment:
     ```cmd
-    kubectl get all -n gitassignment
-    kubectl get po -n gitassignment
+    kubectl get all -n rajatsinghal-3171075
+    kubectl get po -n rajatsinghal-3171075
     ```
 
 ## Usage
@@ -89,7 +102,6 @@ This project depends on Maven and Java 17. The developer must have these two sof
 ## Authors
 
 - Rajat Singhal ([gm.rajat.singhal@gmail.com](mailto:gm.rajat.singhal@gmail.com)) - Initial work
-- ChatGPT, a language model developed by OpenAI - Assistance with README creation
 
 ## Acknowledgments
 
